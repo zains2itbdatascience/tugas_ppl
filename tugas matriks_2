@@ -1,0 +1,33 @@
+import os
+import numpy as np
+import math
+
+I = 4
+A = np.zeros(shape=(I, 3))
+B = np.zeros(shape=(3)) 
+
+A[0, 0] = 1.0
+A[0, 1] = 2.0
+A[1, 0] = 1.0
+A[1, 1] = 1.0
+A[1, 2] = 2.0
+A[2, 0] = 1.0
+A[2, 1] = 1.0
+A[2, 2] = 1.0
+A[3, 1] = 2.0
+A[3, 2] = 1.0
+
+B[0] = 5.0
+B[1] = 7.0
+B[2] = 10.0
+
+C = np.dot(A, B)
+
+print("Matrix A:")
+print(A)
+print()
+print("Vector B:")
+print(B)
+print()
+print("Result C=(A x B):")
+print(C)
