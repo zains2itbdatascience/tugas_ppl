@@ -1,0 +1,79 @@
+import os
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+max=4
+A=np.zeros(shape=(max,max))
+B=np.zeros(shape=(max))
+
+print("Koefisien A :")
+print(A)
+print()
+
+A[0,0]=1.0 
+A[0,1]=2.0 
+A[1,0]=1.0 
+A[1,1]=1.0 
+A[1,2]=2.0 
+A[2,1]=1.0 
+A[2,2]=1.0 
+A[2,3]=2.0 
+A[3,2]=2.0 
+A[3,3]=1.0 
+
+B[0]=5.0 
+B[1]=7.0 
+B[2]=10.0 
+B[3]=7.0 
+
+print("Matrik A :")
+print(A)
+print()
+print("Vektor B :")
+print(B)
+print()
+
+for i in range(max-1):
+  A[i,i+1]=A[i,i+1]/A[i,i]
+  B[i]=B[i]/A[i,i]
+  A[i,i]=1.0 
+  A[i+1,i+1]=A[i+1,i+1]-A[i,i+1]*A[i+1,i]
+  B[i+1]=B[i+1]-B[i]*A[i+1,i]
+  A[i+1,i]=0.0
+    
+print("Fwd E-A :")
+print(A)
+print()
+print("Fwd E-B :")
+print(B)
+print()
+
+max1=max-1  
+for i in range(max1):
+  B[max1-i]=B[max1-i]/A[max1-i,max1-i]
+  A[max1-i,max1-i]=1.0 
+  B[max1-i-1]=B[max1-i-1]-B[max1-i]*A[max1-i-1,max1-i]
+  A[max1-i-1,max1-i]=0.0 
+  
+print("Bwd E-A :")
+print(A)
+print()
+print("Bwd E-B :")
+print(B)
+print()
+
+for i in range(max):
+  B[i]=B[i]/A[i,i]
+  A[i,i]=1.0 
+  
+print("GJ-A :")
+print(A)
+print()
+print("GJ-B :")
+print(B)
+print()
+
+plt.plot(B)
+plt.ylabel('Temperatur(K)')
+plt.show()
